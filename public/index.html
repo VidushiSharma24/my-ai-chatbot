@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My AI Chatbot</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="vendor/highlight-theme.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <h2>My AI</h2>
+    <button id="new-chat">+ New Chat</button>
+    <div id="chat-list" class="chat-list"></div>
+
+    <div class="profile-section">
+
+    <div class="profile-info">
+
+        <div id="profile-avatar">U</div>
+
+        <div class="profile-details">
+
+            <strong id="profile-name">User</strong>
+
+            <small id="profile-email"></small>
+
+        </div>
+
+    </div>
+
+    <button type="button" id="logout-btn">
+        ↪ Logout
+    </button>
+
+</div>
+  </aside>
+
+  <main class="main">
+    <header>
+      <h2>AI Assistant</h2>
+      <span>Online</span>
+    </header>
+
+    <section id="chat-box" aria-live="polite">
+      <div class="welcome">
+        <h1>What can I help with?</h1>
+        <p>Ask me anything to get started.</p>
+      </div>
+    </section>
+
+    <form id="chat-form">
+        <div class="attachment-wrapper">
+
+  <button type="button" id="attachment-btn">
+    +
+  </button>
+
+  <div id="attachment-menu" class="attachment-menu" hidden>
+
+    <label for="pdf-upload" class="attachment-option">
+      📄 Upload PDF
+    </label>
+
+    <button type="button" id="remove-pdf">
+      Remove PDF
+    </button>
+
+  </div>
+
+  <input
+    type="file"
+    id="pdf-upload"
+    accept=".pdf,application/pdf"
+    hidden
+  >
+
+  <span id="upload-status" hidden></span>
+
+</div>
+      <textarea
+        id="message"
+        placeholder="Message your AI..."
+        rows="1"
+        maxlength="4000"
+        required
+      ></textarea>
+      <button id="send-btn" type="submit">Send ↑</button>
+    </form>
+
+    <p class="note">AI can make mistakes. Check important information.</p>
+  </main>
+
+  <script src="vendor/marked.min.js"></script>
+  <script src="vendor/purify.min.js"></script>
+  <script src="vendor/highlight.min.js"></script>
+  <script src="markdown.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
