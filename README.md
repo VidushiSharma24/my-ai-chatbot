@@ -1,63 +1,138 @@
+
 # My AI Chatbot
 
-A ChatGPT-style web chatbot with **streaming responses** and **saved chat history**, built with Node.js, Express and the Groq API.
+A ChatGPT-style AI chatbot with real-time streaming responses, conversational memory, and PDF-based question answering using Retrieval-Augmented Generation (RAG).
 
-> Live demo: _add your Render link here after deploying_
-> Screenshot: _add a screenshot here (e.g. `docs/screenshot.png`)_
+Built with Node.js, Express.js, Groq API, and Hugging Face Transformers.
+
+## Live Demo
+
+[Click here to use My AI Chatbot](https://my-ai-chatbot-4xmx.onrender.com)
 
 ## Features
 
-- Real-time streaming replies (typing effect)
-- ChatGPT-style rendering: colorful markdown (headings, bold, lists, tables), syntax-highlighted code blocks with a Copy button
-- Multiple chats saved in the browser (`localStorage`), with a sidebar to switch and delete chats
-- Conversation context: the last 20 messages are sent with each request, so the bot remembers the conversation
-- Server-side validation (roles, empty/oversized messages, last message must be from user)
-- Per-IP rate limiting to protect the API key
-- Loading state and error handling on the UI
-- XSS-safe rendering (user text is inserted as plain text; AI markdown is sanitized with DOMPurify)
-- 15 automated tests (unit + API) using Node's built-in test runner, with a mocked AI client
+- Real-time AI streaming responses with typing effect.
+- Retrieval-Augmented Generation (RAG) for PDF-based question answering.
+- PDF upload, text extraction, and document chunking.
+- Text embeddings and semantic search for relevant document retrieval.
+- Context-aware AI responses using Groq API.
+- Multiple conversations with saved chat history using localStorage.
+- Browser-based demo login and user profile management.
+- ChatGPT-style responsive user interface with sidebar navigation.
+- Markdown rendering with syntax-highlighted code blocks and Copy button.
+- Server-side input validation and per-IP rate limiting.
+- Loading states and error handling.
+- Sanitized Markdown rendering using DOMPurify.
 
-## Tech stack
+## Tech Stack
 
-HTML, CSS, JavaScript (frontend) | Node.js, Express 5 (backend) | Groq API | marked + DOMPurify + highlight.js (self-hosted) | `node:test` (testing)
+| Category | Technologies |
+|---|---|
+| Frontend | HTML, CSS, JavaScript |
+| Backend | Node.js, Express.js |
+| Generative AI | Groq API, LLM Integration |
+| RAG | Hugging Face Transformers, Text Embeddings, Semantic Search |
+| Document Processing | Multer, pdf-parse |
+| Rendering | marked, DOMPurify, highlight.js |
+| Testing | Node.js Test Runner |
+| Deployment | Render |
+| Version Control | Git, GitHub |
 
-## Run locally
+## RAG Architecture
+
+The application uses Retrieval-Augmented Generation (RAG) to generate context-aware answers from uploaded PDF documents.
+
+```text
+PDF Upload
+     |
+Text Extraction
+     |
+Document Chunking
+     |
+Text Embeddings
+     |
+Semantic Search
+     |
+Relevant Context Retrieval
+     |
+Groq LLM
+     |
+AI-Generated Response
+```
+
+## How It Works
+
+1. The user uploads a PDF document.
+2. The backend extracts text from the PDF.
+3. The extracted text is divided into smaller chunks.
+4. Text embeddings are generated using Hugging Face Transformers.
+5. Semantic search retrieves relevant document chunks based on the user's question.
+6. The retrieved context is provided to the Groq LLM.
+7. The chatbot generates a context-aware response.
+
+## Run Locally
+
+Clone the repository:
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/VidushiSharma24/my-ai-chatbot.git
+```
+
+Navigate to the project directory:
+
+```bash
 cd my-ai-chatbot
+```
+
+Install dependencies:
+
+```bash
 npm install
-cp .env.example .env      # then put your Groq API key in .env
+```
+
+Create a `.env` file in the root directory and add your Groq API key:
+
+```env
+GROQ_API_KEY=your_api_key_here
+```
+
+Start the application:
+
+```bash
 npm start
 ```
 
-Open http://localhost:3000
+Open the application in your browser:
 
-## Run tests
+http://localhost:3000
+
+## Run Tests
 
 ```bash
 npm test
 ```
 
-Tests mock the Groq client, so they run offline and need no API key.
+The existing test suite uses a mocked Groq client to test input validation, API responses, rate limiting, and error handling.
 
-| Area | What is covered |
-|------|-----------------|
-| Input validation | empty array, non-array, invalid role, blank content, content > 4000 chars, last message not from user, 20-message limit |
-| API | `/health`, serving the page, streamed reply, 400 on bad input, 500 on provider failure, 429 on rate limit |
+## Deployment
 
-## Deploy (Render)
+The application is deployed on Render.
 
-1. Push this repo to GitHub (`.env` is git-ignored).
-2. On https://render.com create a **New Web Service** from the repo.
-3. Set the build command to `npm install` and the start command to `npm start`.
-4. Add the environment variable `GROQ_API_KEY` in the Render dashboard.
-5. Open the generated URL.
+- Build Command: `npm install`
+- Start Command: `npm start`
+- Environment Variable: `GROQ_API_KEY`
 
-## Project structure
+## Future Enhancements
 
-```
-server.js         Express server, validation, rate limiter, streaming endpoint
-public/           Frontend (index.html, script.js, markdown.js, style.css, vendor/)
-test/api.test.js  Automated tests
-```
+- Secure user authentication.
+- Database-backed chat history.
+- Multiple PDF document support.
+- Vector database integration.
+- Improved document retrieval and response evaluation.
+
+## Author
+
+**Vidushi Sharma**
+
+- [GitHub](https://github.com/VidushiSharma24)
+- [LinkedIn](https://www.linkedin.com/in/vidushi-sharma0204)
